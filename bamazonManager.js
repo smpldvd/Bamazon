@@ -92,11 +92,9 @@ const showAll = () => {
 };
 
 const showLow = () => {
-	connection.query(
-		"SELECT * FROM products WHERE stock_quantity < 5",
-		(err, res) => {
-			if (err) throw err;
-
+	connection.query("SELECT * FROM products WHERE stock_quantity < 5", (err, res) => {
+      if (err) throw err;
+      
 			for (let i = 0; i < res.length; i++) {
 				table.push([
 					res[i].item_id,
@@ -115,7 +113,8 @@ const showLow = () => {
 
 const addStock = () => {
 	connection.query("SELECT * FROM products", (err, res) => {
-		if (err) throw err;
+    if (err) throw err;
+    
 		inquirer.prompt([
       {
         type: "list",

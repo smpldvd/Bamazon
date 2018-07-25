@@ -103,7 +103,11 @@ const startBam = () => {
                     let stock = pickedProduct.stock_quantity - parseFloat(answer.quantity);
                     // Obtain total cost to customer
                     let totalPrice = (quant * parseFloat(pickedProduct.price)).toFixed(2);
-                    console.log(`Your total will be: $${totalPrice}`);
+                    connection.query("UPDATE products SET ? WHERE ?", [{stock_quantity: stock}, {product_name: pickedProduct}], (err, res) => {
+                        if (err) throw err;
+                        console.log("Purchase successful!");
+                        console.log(`Your total will be: $${totalPrice}`);
+                    })
                 }
                 // If quantity is greater than stock
                 else {
